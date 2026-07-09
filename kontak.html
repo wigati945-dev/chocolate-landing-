@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - Choco Boutique</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1f1005 0%, #110802 100%);
+            color: #f5eae0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .latar-bintang {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bintang {
+            width: 2px;
+            height: 2px;
+            background: transparent;
+            border-radius: 50%;
+            animation: berkedip 3s ease-in-out infinite alternate;
+        }
+
+        .bintang-1 {
+            box-shadow:
+                10vw 20vh #fff, 25vw 15vh rgba(212, 175, 55, 0.6), 80vw 10vh #fff,
+                45vw 40vh rgba(212, 175, 55, 0.4), 90vw 35vh #fff, 15vw 70vh #fff,
+                65vw 60vh rgba(212, 175, 55, 0.7), 35vw 85vh #fff, 75vw 80vh #fff;
+        }
+
+        .bintang-2 {
+            box-shadow:
+                5vw 45vh rgba(212, 175, 55, 0.5), 55vw 20vh #fff, 70vw 45vh #fff,
+                30vw 60vh rgba(212, 175, 55, 0.6), 85vw 65vh #fff, 50vw 80vh #fff,
+                20vw 90vh rgba(212, 175, 55, 0.4), 95vw 15vh #fff, 40vw 10vh #fff;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes berkedip {
+            0% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        .halaman {
+            width: min(960px, calc(100% - 32px));
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: 28px 0 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-box {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 34px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #af851a, #d4af37);
+            color: #110802;
+            padding: 13px 28px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover,
+        .btn.aktif {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(45deg, #d4af37, #f3e5ab);
+        }
+
+        .kontak-wrapper {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(280px, 1.05fr);
+            gap: 28px;
+            align-items: center;
+        }
+
+        .judul-box h1 {
+            color: #d4af37;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.05;
+            margin: 0 0 14px;
+            letter-spacing: 2px;
+        }
+
+        .judul-box p {
+            color: #dcd1c4;
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .kontak-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .kontak-card {
+            padding: 22px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .kontak-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.5);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .label {
+            margin: 0 0 8px;
+            color: #d4af37;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.86rem;
+        }
+
+        .isi {
+            margin: 0;
+            color: #fff6dc;
+            font-size: clamp(1.05rem, 3.6vw, 1.3rem);
+            line-height: 1.5;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .isi a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .isi a:hover {
+            color: #d4af37;
+        }
+
+        .animasi-muncul {
+            opacity: 0;
+            animation: munculKeAtas 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        @keyframes munculKeAtas {
+            from {
+                opacity: 0;
+                transform: translateY(42px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 760px) {
+            .halaman {
+                justify-content: flex-start;
+            }
+
+            .kontak-wrapper {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .halaman {
+                width: min(100% - 22px, 960px);
+                padding-top: 18px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .kontak-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="latar-bintang">
+        <div class="bintang bintang-1"></div>
+        <div class="bintang bintang-2"></div>
+    </div>
+
+    <main class="halaman animasi-muncul">
+        <nav class="menu-box">
+            <a href="index.html" class="btn">HOME</a>
+            <a href="pemesanan.html" class="btn">BELI SEKARANG</a>
+            <a href="produk.html" class="btn">PRODUK</a>
+            <a href="kontak.html" class="btn aktif">KONTAK KAMI</a>
+        </nav>
+
+        <section class="kontak-wrapper">
+            <div class="judul-box">
+                <h1>Kontak Kami</h1>
+                <p>Hubungi Choco Boutique untuk pemesanan, pertanyaan produk, atau informasi lainnya. Kami siap membantu setiap hari.</p>
+            </div>
+
+            <div class="kontak-list" aria-label="Informasi kontak Choco Boutique">
+                <article class="kontak-card">
+                    <p class="label">Email</p>
+                    <p class="isi">
+                        <a href="mailto:wigati.inspirasi@gmail.com">wigati.inspirasi@gmail.com</a>
+                    </p>
+                </article>
+
+                <article class="kontak-card">
+                    <p class="label">WhatsApp</p>
+                    <p class="isi">
+                        <a href="https://wa.me/6281293547385">081293547385</a>
+                    </p>
+                </article>
+
+                <article class="kontak-card">
+                    <p class="label">Jam Layanan</p>
+                    <p class="isi">Everyday, 09:00 WIB - 18:00 WIB</p>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

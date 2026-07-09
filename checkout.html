@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Choco Boutique</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1f1005 0%, #110802 100%);
+            color: #f5eae0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .latar-bintang {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bintang {
+            width: 2px;
+            height: 2px;
+            background: transparent;
+            border-radius: 50%;
+            animation: berkedip 3s ease-in-out infinite alternate;
+        }
+
+        .bintang-1 {
+            box-shadow:
+                10vw 20vh #fff, 25vw 15vh rgba(212, 175, 55, 0.6), 80vw 10vh #fff,
+                45vw 40vh rgba(212, 175, 55, 0.4), 90vw 35vh #fff, 15vw 70vh #fff,
+                65vw 60vh rgba(212, 175, 55, 0.7), 35vw 85vh #fff, 75vw 80vh #fff;
+        }
+
+        .bintang-2 {
+            box-shadow:
+                5vw 45vh rgba(212, 175, 55, 0.5), 55vw 20vh #fff, 70vw 45vh #fff,
+                30vw 60vh rgba(212, 175, 55, 0.6), 85vw 65vh #fff, 50vw 80vh #fff,
+                20vw 90vh rgba(212, 175, 55, 0.4), 95vw 15vh #fff, 40vw 10vh #fff;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes berkedip {
+            0% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        .halaman {
+            width: min(980px, calc(100% - 32px));
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: 28px 0 48px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-box {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 34px;
+        }
+
+        .btn,
+        button {
+            border: 0;
+            background: linear-gradient(45deg, #af851a, #d4af37);
+            color: #110802;
+            padding: 13px 26px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+            letter-spacing: 1px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover,
+        .btn.aktif,
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(45deg, #d4af37, #f3e5ab);
+        }
+
+        .btn-sekunder {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff6dc;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-sekunder:hover {
+            background: rgba(212, 175, 55, 0.16);
+            color: #f3e5ab;
+        }
+
+        .judul-box {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 32px;
+        }
+
+        .judul-box h1 {
+            color: #d4af37;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.05;
+            margin: 0 0 14px;
+            letter-spacing: 2px;
+        }
+
+        .judul-box p {
+            color: #dcd1c4;
+            font-size: 1.08rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .checkout-box {
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+            padding: 24px;
+        }
+
+        .checkout-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .checkout-item {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto auto;
+            gap: 18px;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.14);
+        }
+
+        .checkout-item h2 {
+            margin: 0 0 6px;
+            color: #fff6dc;
+            font-size: 1.2rem;
+        }
+
+        .checkout-item p {
+            margin: 0;
+            color: #dcd1c4;
+        }
+
+        .subtotal {
+            color: #d4af37;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .hapus-btn {
+            padding: 11px 16px;
+        }
+
+        .ringkasan-total {
+            display: grid;
+            gap: 10px;
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.24);
+        }
+
+        .baris-total {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            color: #fff6dc;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .baris-total strong {
+            color: #d4af37;
+        }
+
+        .aksi-checkout {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        .kosong {
+            text-align: center;
+            color: #dcd1c4;
+            line-height: 1.8;
+            margin: 8px 0 20px;
+        }
+
+        .animasi-muncul {
+            opacity: 0;
+            animation: munculKeAtas 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        @keyframes munculKeAtas {
+            from {
+                opacity: 0;
+                transform: translateY(42px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 680px) {
+            .halaman {
+                width: min(100% - 22px, 980px);
+                padding-top: 18px;
+            }
+
+            .btn,
+            button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .checkout-item {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .subtotal {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="latar-bintang">
+        <div class="bintang bintang-1"></div>
+        <div class="bintang bintang-2"></div>
+    </div>
+
+    <main class="halaman animasi-muncul">
+        <nav class="menu-box">
+            <a href="index.html" class="btn">HOME</a>
+            <a href="pemesanan.html" class="btn">BELI SEKARANG</a>
+            <a href="produk.html" class="btn">PRODUK</a>
+            <a href="kontak.html" class="btn">KONTAK KAMI</a>
+        </nav>
+
+        <section class="judul-box">
+            <h1>Checkout</h1>
+            <p>Periksa kembali isi keranjang Anda sebelum melanjutkan pemesanan.</p>
+        </section>
+
+        <section class="checkout-box" aria-label="Isi keranjang checkout">
+            <div id="checkoutList" class="checkout-list"></div>
+            <div id="ringkasanTotal" class="ringkasan-total"></div>
+            <div class="aksi-checkout">
+                <a href="pemesanan.html" class="btn btn-sekunder">Tambah Pesanan</a>
+                <button type="button" id="kosongkanBtn">Kosongkan Keranjang</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/cart.js"></script>
+    <script>
+        const checkoutList = document.getElementById('checkoutList');
+        const ringkasanTotal = document.getElementById('ringkasanTotal');
+        const kosongkanBtn = document.getElementById('kosongkanBtn');
+
+        function tampilkanCheckout() {
+            const keranjang = ambilKeranjang();
+
+            if (keranjang.length === 0) {
+                checkoutList.innerHTML = '<p class="kosong">Keranjang masih kosong. Silakan kembali ke halaman pemesanan untuk memilih produk.</p>';
+                ringkasanTotal.innerHTML = '';
+                kosongkanBtn.style.display = 'none';
+                return;
+            }
+
+            kosongkanBtn.style.display = 'inline-block';
+            checkoutList.innerHTML = keranjang.map((item) => `
+                <article class="checkout-item">
+                    <div>
+                        <h2>${item.nama}</h2>
+                        <p>${item.jumlah} x ${formatRupiah(item.harga)}</p>
+                    </div>
+                    <div class="subtotal">${formatRupiah(item.harga * item.jumlah)}</div>
+                    <button type="button" class="hapus-btn btn-sekunder" data-id="${item.id}">Hapus</button>
+                </article>
+            `).join('');
+
+            ringkasanTotal.innerHTML = `
+                <div class="baris-total">
+                    <span>Total Barang</span>
+                    <strong>${hitungJumlahBarang(keranjang)}</strong>
+                </div>
+                <div class="baris-total">
+                    <span>Total Harga</span>
+                    <strong>${formatRupiah(hitungTotal(keranjang))}</strong>
+                </div>
+            `;
+
+            document.querySelectorAll('.hapus-btn').forEach((tombol) => {
+                tombol.addEventListener('click', () => {
+                    hapusDariKeranjang(tombol.dataset.id);
+                    tampilkanCheckout();
+                });
+            });
+        }
+
+        kosongkanBtn.addEventListener('click', () => {
+            kosongkanKeranjang();
+            tampilkanCheckout();
+        });
+
+        tampilkanCheckout();
+    </script>
+</body>
+</html>

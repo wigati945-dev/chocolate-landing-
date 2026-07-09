@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choco Boutique - Sensasi Coklat Premium</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1f1005 0%, #110802 100%);
+            color: #f5eae0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden; /* Mencegah munculnya scrollbar akibat bintang */
+            position: relative;
+        }
+
+        /* --- KODE ANIMASI BINTANG HALUS (SPARKLES) --- */
+        .latar-bintang {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Agar tidak menghalangi klik pada tombol */
+            z-index: 1;
+        }
+
+        /* Membuat pola bintang murni menggunakan CSS Box Shadow */
+        .bintang {
+            width: 2px;
+            height: 2px;
+            background: transparent;
+            border-radius: 50%;
+            animation: berkedip 3s ease-in-out infinite alternate;
+        }
+
+        /* Sekumpulan bintang lapisan pertama */
+        .bintang-1 {
+            box-shadow: 
+                10vw 20vh #fff, 25vw 15vh rgba(212, 175, 55, 0.6), 80vw 10vh #fff, 
+                45vw 40vh rgba(212, 175, 55, 0.4), 90vw 35vh #fff, 15vw 70vh #fff, 
+                65vw 60vh rgba(212, 175, 55, 0.7), 35vw 85vh #fff, 75vw 80vh #fff;
+            animation-delay: 0s;
+        }
+
+        /* Sekumpulan bintang lapisan kedua dengan jeda waktu kedip berbeda */
+        .bintang-2 {
+            box-shadow: 
+                5vw 45vh rgba(212, 175, 55, 0.5), 55vw 20vh #fff, 70vw 45vh #fff, 
+                30vw 60vh rgba(212, 175, 55, 0.6), 85vw 65vh #fff, 50vw 80vh #fff, 
+                20vw 90vh rgba(212, 175, 55, 0.4), 95vw 15vh #fff, 40vw 10vh #fff;
+            animation-delay: 1.5s;
+        }
+
+        /* Animasi kedip bintang */
+        @keyframes berkedip {
+            0% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        /* Wadah konten utama ditaruh di atas lapisan bintang */
+        .container {
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            z-index: 2; 
+        }
+        
+        .produk-box {
+            margin-bottom: 25px;
+        }
+        .img-coklat {
+            width: 200px;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .img-coklat:hover {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: #d4af37;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            color: #dcd1c4;
+        }
+        .btn {
+            background: linear-gradient(45deg, #af851a, #d4af37);
+            color: #110802;
+            padding: 14px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(45deg, #d4af37, #f3e5ab);
+        }
+
+        /* ANIMASI KONTEN MUNCUL */
+        .animasi-muncul {
+            opacity: 0;
+            animation: munculKeAtas 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        @keyframes munculKeAtas {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lapisan Efek Bintang Latar Belakang -->
+    <div class="latar-bintang">
+        <div class="bintang bintang-1"></div>
+        <div class="bintang bintang-2"></div>
+    </div>
+
+    <!-- Konten Utama -->
+           
+        <div class="container animasi-muncul">
+            <div class="menu-box">
+        <a href="pemesanan.html" class="btn" >BELI SEKARANG</a>
+        <a href="produk.html" class="btn">PRODUK</a>
+        <a href="kontak.html" class="btn">KONTAK KAMI</a>
+        <p></p>
+        <p></p>
+        <div class="produk-box">
+            <!--<img class="img-coklat" src="C:\Users\ASUS\Downloads\sara-cervera-we4l7ch6iwc-unsplash.jpg" alt="Coklat Premium Murni">-->
+        <img class="img-coklat" src="assets/choco-main.jpg" alt="Coklat Premium Murni">
+        </div>
+        
+        <h1>Choco Boutique</h1>
+        <p>Nikmati kemewahan coklat artisan terbaik yang dipadukan secara sempurna dari biji kakao pilihan dunia untuk lidah Anda yang berkelas.</p>
+        
+    </div>
+
+</body>
+</html>
